@@ -36,11 +36,8 @@ pgadmin.example.com  → IP вашего сервера
 
 ```bash
 
-# Скачайте репозиторий
-git clone https://github.com/your-org/sre-installer.git
-cd sre-installer
-
-# Запустите установщик
+git clone https://github.com/Oni-Wan-Shinobi/n8n-one-click-installer.git
+cd n8n-one-click-installer
 bash install.sh
 ```
 
