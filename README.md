@@ -35,8 +35,6 @@ pgadmin.example.com  → IP вашего сервера
 ## Установка
 
 ```bash
-# Зайдите на сервер по SSH
-ssh root@your-server-ip
 
 # Скачайте репозиторий
 git clone https://github.com/your-org/sre-installer.git
