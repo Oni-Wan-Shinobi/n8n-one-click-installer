@@ -1,0 +1,65 @@
+replicaCount: 1
+
+image:
+  repository: n8nio/n8n
+  pullPolicy: IfNotPresent
+  tag: "2.21.8"
+
+service:
+  type: ClusterIP
+  port: 5678
+
+ingress:
+  enabled: true
+  className: "traefik"
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: n8n.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - n8n.example.com
+      secretName: n8n-tls
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /healthz
+    port: http
+  initialDelaySeconds: 30
+  periodSeconds: 10
+
+env:
+  N8N_PORT: "5678"
+  N8N_PROTOCOL: "https"
+  N8N_HOST: "n8n.example.com"
+  WEBHOOK_URL: "https://n8n.example.com"
+  GENERIC_TIMEZONE: "Europe/Helsinki"
+  DB_TYPE: "postgresdb"
+  DB_POSTGRESDB_HOST: "postgres"
+  DB_POSTGRESDB_PORT: "5432"
+  DB_POSTGRESDB_DATABASE: "n8ndb"
+  DB_POSTGRESDB_USER: "n8nuser"
+  N8N_ENCRYPTION_KEY: "changeme"
+
+persistence:
+  enabled: true
+  size: 1Gi
+  storageClass: "local-path"
