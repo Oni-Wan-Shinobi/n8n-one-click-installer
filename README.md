@@ -1,4 +1,4 @@
-# SRE Installer — n8n + pgAdmin + PostgreSQL
+# Installer — n8n + pgAdmin + PostgreSQL
 
 Автоматическая установка n8n, pgAdmin и PostgreSQL на чистый сервер с HTTPS через Let's Encrypt.
 
